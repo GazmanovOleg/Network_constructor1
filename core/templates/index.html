@@ -1,0 +1,80 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width,initial-scale=1.0">
+    <link rel="stylesheet" href="{% static "css/index.css" %}">
+    
+  </head>
+  <body>
+    <header>
+        <div class="headers">{{ text }}</div>
+    </header>
+    <main class="content">
+        <div class="main_m">
+            <div class="logo">
+                <p>СЕТЕВОЙ КОНСТРУКТОР</p>
+            </div>
+            <div class="menu">
+                <ul class="network_elem">
+                    <item>
+                        <div class="first">
+                        <p>МАРШРУТИЗАТОРЫ</p>
+                        <button id="btn_main_m" class="btn_main_m" onclick = "main_ml()" v-show="isDownVisible"><img id="btn_down" src="{% static "img/arrow-down.png" %}"></button>
+                        </div>
+                        <div class="items_list" id ="r_list">
+                            {% for item in routers%}
+                            <div class="img_container" >
+                                 
+                                 <img draggable="true" class="js-elem" src="{{ item.image.url }}" alt="{{ item.model }}" >
+                                
+                            </div>
+                            {% endfor %}
+                        </div>
+                    </item>
+                   
+                    <item><p>КОММУТАТОРЫ</p><button id="btn_main_m" class="btn_main_m"><img src="{% static "img/arrow-down.png" %}"></button></item>
+                    <item>СОЕДИНЕНИЯ<button id="btn_main_m" class="btn_main_m"><img src="{% static "img/arrow-down.png" %}"></button></item>
+                    <item>КОНЕЧНЫЕ УСТРОЙСТВА<button id="btn_main_m" class="btn_main_m"><img src="{% static "img/arrow-down.png" %}"></button></item>
+                </ul>
+            </div>
+                
+       </div>
+       <div class="root">
+        <div class="field js-field"></div>
+        <div class="buttom-menu"></div>
+    </div>
+
+    
+    </main>
+    <script src="https://cdn.polyfill.io/v1/polyfill.js?features=Element.prototype.closest"></script>
+    <script src="{% static "js/DragManager.js" %}"></script>
+    <script>
+
+
+        function main_ml() {
+            let el = document.getElementById("btn_down");
+            el.addEventListener('click', function (e) {
+                if (el.src.slice(-26) == "{% static "img/arrow-down.png" %}"){
+                    el.src="{% static "img/arrow-up.png" %}";
+                } else{
+                    el.src="{% static "img/arrow-down.png" %}";
+                }
+            });
+
+            if (r_list.hidden == false){
+                document.getElementById("r_list").hidden = true;
+            }
+            else{
+                document.getElementById("r_list").hidden = false;
+            }
+
+            
+          }; 
+      </script>
+      
+  </body>
+
+</html>
